@@ -1,13 +1,14 @@
 #!/bin/bash
 
-#update repos
+# update repos
 sudo apt-get update
 
-#install PHP / Apache
+#install php / apache
 sudo apt-get install -y php5 libapache2-mod-php5 php-pear
 
-# Install jenkins
+# install jenkins
 sudo apt-get install -y jenkins
 
+# install phing via pear
 pear channel-discover pear.phing.info
 pear install --alldeps phing/phing

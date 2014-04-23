@@ -10,7 +10,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.ssh.guest_port = 22
   config.vm.network "forwarded_port", guest: 80, host: 8888
   config.vm.network "forwarded_port", guest: 22, host: 5555
-  config.vm.network "forwarded_port", guest: 8282, host: 8080
+  config.vm.network "forwarded_port", guest: 8080, host: 8288
 
   config.vm.provision "shell", path: "bootstrap.sh"
 end
