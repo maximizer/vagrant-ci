@@ -49,3 +49,8 @@ pear install --alldeps install pdepend/PHP_Depend-beta
 pear channel-discover pear.phpmd.org
 pear channel-discover pear.pdepend.org
 pear install --alldeps phpmd/PHP_PMD
+
+# install phpdox
+wget http://phpdox.de/releases/phpdox.phar
+chmod +x phpdox.phar
+mv phpdox.phar /usr/local/bin/phpdox
