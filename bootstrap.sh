@@ -11,7 +11,7 @@ apt-get update
 apt-get install -y php5 libapache2-mod-php5 php-pear
 
 # install a few other things we'll need / want
-apt-get install -y curl make vim
+apt-get install -y curl make vim git
 
 # install composer
 curl -sS https://getcomposer.org/installer | php
@@ -74,3 +74,7 @@ mv phpdox.phar /usr/local/bin/phpdox
 jenkins-cli -s http://localhost:8080  install-plugin checkstyle cloverphp crap4j dry htmlpublisher jdepend plot pmd violations xunit
 jenkins-cli -s http://localhost:8080 safe-restart
 
+# pull Sebastian's jenkins-php.org template
+wget https://raw.github.com/sebastianbergmann/php-jenkins-template/master/config.xml
+jenkins-cli -s http://localhost:8080 create-job php-template
+jenkins-cli -s http://localhost:8080 reload-configuration
