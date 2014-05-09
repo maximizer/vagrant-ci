@@ -4,6 +4,9 @@
 wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -
 echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list
 
+# update repos
+apt-get update
+
 # update repo for Java JDK
 apt-get install -y python-software-properties
 add-apt-repository -y ppa:webupd8team/java
