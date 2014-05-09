@@ -4,14 +4,21 @@
 wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -
 echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list
 
+# update repo for Java JDK
+apt-get install -y python-software-properties
+add-apt-repository -y ppa:webupd8team/java
+
 # update repos
 apt-get update
+
+# install java JDK
+apt-get install oracle-java7-installer
 
 # install php / apache
 apt-get install -y php5 libapache2-mod-php5 php-pear
 
 # install a few other things we'll need / want
-apt-get install -y curl make vim git
+apt-get install -y curl make vim ant git
 
 # install composer
 curl -sS https://getcomposer.org/installer | php
@@ -28,9 +35,10 @@ apt-get install -y jenkins jenkins-cli
 pear channel-discover pear.phing.info
 pear install --alldeps phing/phing
 
-# install phpunit via pear
-pear config-set auto_discover 1
-pear install --alldeps pear.phpunit.de/PHPUnit
+# install phpunit
+wget https://phar.phpunit.de/phpunit.phar
+chmod +x phpunit.phar
+mv phpunit.phar /usr/local/bin/phpunit
 
 # install php code sniffer
 pear install --alldeps PHP_CodeSniffer-2.0.0a2
@@ -70,8 +78,8 @@ mv phpdox.phar /usr/local/bin/phpdox
   # Now push it to the update URL
   curl -X POST -H "Accept: application/json" -d @default.json http://localhost:8080/updateCenter/byId/default/postBack
 
-# ... now we can installl all of these.
-jenkins-cli -s http://localhost:8080  install-plugin checkstyle cloverphp crap4j dry htmlpublisher jdepend plot pmd violations xunit
+# ... now we can install all of these.
+jenkins-cli -s http://localhost:8080  install-plugin checkstyle cloverphp crap4j dry htmlpublisher jdepend plot pmd violations xunit git
 jenkins-cli -s http://localhost:8080 safe-restart
 
 # pull Sebastian's jenkins-php.org template
